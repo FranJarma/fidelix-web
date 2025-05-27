@@ -1,15 +1,16 @@
 import { Box, Flex } from "@chakra-ui/react";
 import { Outlet } from "react-router-dom";
+
 import Header from "./header/header";
 import Sidebar from "./sidebar/sidebar";
 
 const Layout = () => {
   return (
-    <Flex direction="column" height="100vh" bg="gray.50">
+    <Flex bg="gray.50" direction="column" height="100vh">
       <Header />
       <Flex flex="1" overflow="hidden">
         <Sidebar />
-        <Box as="main" flex="1" p={6} overflowY="auto" bg="gray.50">
+        <Box as="main" bg="gray.50" flex="1" overflowY="auto" p={6}>
           <Outlet />
         </Box>
       </Flex>
