@@ -9,7 +9,8 @@ import {
   getLogoutRoute,
   isActiveRoute,
 } from "./utils/sidebar.utils";
-import { Tooltip } from "../../ui/tooltip";
+
+import { Tooltip } from "@/components/ui";
 
 export default function Sidebar() {
   const { isCollapsed, toggleCollapse } = useSidebarStore();
@@ -19,7 +20,20 @@ export default function Sidebar() {
   const sidebarGroups = getSidebarRoutesWithoutLogout(sidebarRoutes);
   const logoutRoute = getLogoutRoute(sidebarRoutes);
 
+  const closeSession = () => {
+    localStorage.removeItem("isLoggedIn");
+    navigate("/");
+  };
+
   const renderItem = (route: SidebarRoute, isActive: boolean) => {
+    const handleClick = () => {
+      if (route.path === logoutRoute?.path) {
+        closeSession();
+      } else {
+        navigate(route.path);
+      }
+    };
+
     const itemContent = (
       <Flex
         _hover={{ color: "brand.500", bg: "brand.50" }}
@@ -32,7 +46,7 @@ export default function Sidebar() {
         px={3}
         py={2}
         transition="all 0.15s"
-        onClick={() => navigate(route.path)}
+        onClick={handleClick}
       >
         <Icon as={route.icon} boxSize={5} />
         {!isCollapsed && <Text fontSize="sm">{route.label}</Text>}
@@ -111,11 +125,11 @@ export default function Sidebar() {
     >
       <Flex align="center" justify="space-between" mb={4}>
         <Image
-          src="logo-fidelix.webp"
           alt="Logo"
-          width={200}
-          marginLeft={2}
           display={isCollapsed ? "none" : "flex"}
+          marginLeft={2}
+          src="logo-fidelix.webp"
+          width={200}
         />
         <Button aria-label="Toggle Sidebar" size="sm" variant="subtle" onClick={toggleCollapse}>
           <Tooltip content={isCollapsed ? "Mostrar" : "Ocultar"}>

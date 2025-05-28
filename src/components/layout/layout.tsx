@@ -4,7 +4,7 @@ import { Outlet } from "react-router-dom";
 import Header from "./header/header";
 import Sidebar from "./sidebar/sidebar";
 
-const Layout = () => {
+export default function Layout() {
   return (
     <Flex bg="gray.50" direction="column" height="100vh">
       <Header />
@@ -16,6 +16,4 @@ const Layout = () => {
       </Flex>
     </Flex>
   );
-};
-
-export default Layout;
+}

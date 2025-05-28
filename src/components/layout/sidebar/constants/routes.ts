@@ -67,7 +67,7 @@ export const sidebarRoutes: SidebarGroup[] = [
         id: SIDEBAR_ROUTES.LOGOUT,
         label: "Cerrar sesión",
         icon: FiLogOut,
-        path: "/logout",
+        path: "/login",
       },
     ],
   },
